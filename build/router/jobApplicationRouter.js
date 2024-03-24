@@ -1,0 +1,20 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.JobApplicationRouter = void 0;
+const express_1 = __importDefault(require("express"));
+const jobApplicationController_1 = require("../controller/jobApplicationController");
+const JobApplicationBusiness_1 = require("../business/JobApplicationBusiness");
+const JobApplicationDatabase_1 = require("../dataBase/JobApplicationDatabase");
+const TokenManager_1 = require("../services/TokenManager");
+const IdGenerator_1 = require("../services/IdGenerator");
+const JobOpportunityDatabase_1 = require("../dataBase/JobOpportunityDatabase");
+exports.JobApplicationRouter = express_1.default.Router();
+const jobApplicationController = new jobApplicationController_1.JobApplicationController(new JobApplicationBusiness_1.JobApplicationBusiness(new JobApplicationDatabase_1.JobApplicationDatabase(), new TokenManager_1.TokenManager(), new IdGenerator_1.IdGenerator(), new JobOpportunityDatabase_1.JobOpportunityDatabase()));
+exports.JobApplicationRouter.post("/", jobApplicationController.create);
+exports.JobApplicationRouter.put("/accept/:id", jobApplicationController.accept);
+exports.JobApplicationRouter.put("/deny/:id", jobApplicationController.deny);
+exports.JobApplicationRouter.delete("/:id", jobApplicationController.delete);
+exports.JobApplicationRouter.get("/", jobApplicationController.getUserId);
