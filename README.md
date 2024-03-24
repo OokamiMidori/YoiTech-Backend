@@ -8,6 +8,7 @@ Antes de utilizar não esqueça de configurar o arquivo ".env"
 DB_FILE_PATH=./src/database/vagasJapao.db
 
 JWT_KEY=minha-senha-super-segura
+
 JWT_EXPIRES_IN=7d
 
 BCRRYPT_COST=12"
